@@ -1,5 +1,5 @@
 # $$Bat Sonar Project$$ 
-## $$inspired\\by\\nature$$ 
+## $$inspired-by-nature$$ 
 
 #### This is an ambitious project, that I decided to embark on as a learning opportunity before my main "passivesonar" effort. In this document, I will outline the goals and approaches to the task at hand, along with a degree of mathematics behind them.
 
