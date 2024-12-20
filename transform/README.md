@@ -112,7 +112,7 @@ $$
 $$
 
 $$
-|\vec{f}| = S_r
+len(\vec{f}) = S_r
 $$
 
 That is about it. Now I can create a stem plot with `matplotlib` where $x\text{-axis}$ is $\vec{f}$ and $y\text{-axis}$ is either $\vec{P}$ or $\vec{A}$.
