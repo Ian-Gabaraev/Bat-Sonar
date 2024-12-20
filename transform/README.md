@@ -49,7 +49,11 @@ $$
 $$
 
 
-As we iterate over the range  $ [0, len(\vec{t})] $
+As we iterate over the range  
+
+$$
+[0:len(\vec{t})]
+$$
 
 - Choose the current integer $i$ in the iteration as the base frequency $f$
 - Create a complex sine wave using Euler's formula
