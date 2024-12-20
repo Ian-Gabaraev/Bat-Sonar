@@ -24,9 +24,13 @@ First, get a signal. A signal in our case will be a Wave file. We load it with `
 signal, sr = librosa.load("path")
 ```
 
-Now we have the sampling rate `sr` and the `signal` which is represented as a one-dimensional `numpy` array, or a vector. I will refer to it further on as $\vec{sig}$ to indicate it is a vector.
+Now we have the sampling rate $S_r$ and the `signal` which is represented as a one-dimensional `numpy` array, or a vector. I will refer to it further on as $\vec{sig}$ to indicate it is a vector.
 
-A `sampling rate` $S_r$ refers to the number of samples taken on a sound signal. $S_r$ needs to follow a rule, where it has to be at least twice as high as the highest frequency in the signal to avoid `aliasing`.
+A `sampling rate` $S_r$ refers to the number of samples taken on a sound signal. $S_r$ needs to follow a rule, where it has to be at least twice as high as the highest frequency in the signal to avoid `aliasing`. This is referred to as the `Nyquist frequency`.
+
+$$
+F_N = \frac{S_r}{2}
+$$
 
 We have $\vec{signal}$ and the $S_r$. The next step is to create a time vector. The length of the vector has to be at twice the $S_r$, and range from 0 to the duration of the signal $S_t$, evenly spaced.
 
@@ -36,15 +40,89 @@ $$
 
 Now that we have $\vec{t}$, we start the loop.
 
-We iterate over a range of number $[0, \text{len}(\mathbf{\vec{v}})]$
+Initialize a vector $\vec{dc}$, or a `numpy.zeros` of length equal the length of $\vec{t}$.
+
+Additionally, initialize another time vector for the complex sine waves $\vec{ft}$.
+
+$$
+\vec{ft} = \frac{\begin{bmatrix} 0 & 1 & 2  & ... & len(\vec{t})\end{bmatrix}}{len(\vec{t})}
+$$
+
+
+As we iterate over the range $[0, len(\vec{t})]$
 
 - Choose the current integer $i$ in the iteration as the base frequency $f$
 - Create a complex sine wave using Euler's formula
 
 $$
-
+e^{Ik} = cos(k) + Isin(k)
 $$
 
+Remember the sine wave formula
+
+$$
+A * 2 \pi ft+\phi
+$$
+
+If we plug in this expression into Euler's formula, we get something curious
+
+$$
+e^{I2 \pi ft+\phi} = cos(2 \pi ft+\phi) + Isin(2 \pi ft+\phi)
+$$
+
+And that is the formula for the complex sine wave $\vec{csw}$. Remember $I$ is the imaginary part of a complex number. Complex numbers are a topic of their own, though. 
+
+- Compute a dot product
+
+$$
+\mathbf{\vec{sig}} \cdot \mathbf{\vec{csw}} 
+$$
+
+- Store the dot product - called a `Fourier coefficient` - in $\vec{dc}$.
 
 
+This is the end of the loop. We now have an vector $\vec{dc}$ that contains Fourier coefficients. The next task is to normalize them.
 
+$$
+\vec{dcn} = \frac{\vec{dc}}{len(\vec{t})}
+$$
+
+Otherwise we will end up with amplitudes way too large - as the loop progresses, the dot products get bigger and bigger.
+
+Next step, compute the amplitudes. This is straightforward.
+
+$$
+\vec{A} = |\vec{dcn}| ^ 2
+$$
+
+Additionnaly, if I want to use power instead of amplitudes, I can do
+
+$$
+\vec{P} = \vec{A}^2
+$$
+
+As the final step, we generate the frequencies vector $\vec{f}$ of length $S_r$
+
+$$
+\vec{f} = \begin{bmatrix} 0 & 0.1 & 0.2 & ... & F_N\end{bmatrix}
+$$
+
+$$
+|\vec{f}| = S_r
+$$
+
+That is about it. Now I can create a stem plot with `matplotlib` where $x\text{-axis}$ is $\vec{f}$ and $y\text{-axis}$ is either $\vec{P}$ or $\vec{A}$.
+
+However, I can only use the left half of my amplitudes - because of the Nyquist rule, the other half is aliased and not really useful. Thus:
+
+$$
+\vec{A} = \vec{A}\begin{bmatrix} 0 :len(\vec{f})\end{bmatrix}
+$$
+
+The same in Python
+
+```
+plt.stem(frequencies, amplitudes[range(len(frequencies))])
+```
+
+![StemPlot](stemplot.png)
