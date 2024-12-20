@@ -294,3 +294,37 @@ plt.xlim(-1,15)
 plt.show()
 
 ```
+
+## Additional notes on DFT
+
+- We never really have to implement DFT from scratch. Packages like `numpy`, `pytorch` and `librosa` have FFT and FFT2 (2D-FFT) implemented way more efficiently.
+
+- If it has to be done this way, doing it with `pytorch` or `cupy` on a CUDA-equipped GPU is desirable, as it is much, much faster than on CPU.
+
+- FT works with complex numbers aka 2d-numbers. A complex number is comprised of a real part and an imaginary part $I$
+
+$$
+\begin{bmatrix} 2&3I\end{bmatrix}
+$$
+
+- The magnitude of a Fourier coefficient away from the origin is the amplitude $A$ of a frequency $f$, and the angle is the phase $\phi$ of $f$.
+
+$$
+|z|^2 = imag(z)^2 + real(z)^2
+$$
+
+$$
+\phi = arctan(
+    \frac{imag(z)}{real(z)}
+)
+$$
+
+- Adding a DC component to a sine wave will shift it vertically
+- We have to normalize the time vector for complex sine waves in order to keep it independent from the properties of the original sine wave. Essentially, what happens inside a Fourier Transform loop has to be predictable and not influenced by the length of the original signal.
+- A complex wave is comprised of the sine and cosine waves. Sine is the imaginary part and cosine is the real part.
+- The purpose of CSW is as follows: if we only use real-valued sines or cosines to compute FT, any change in the phase of the original signals will produce different results - even though the signal did not change.
+- We use complex dots products, because the dot product between a real sine wave and a signal is phase-dependent. Complex dot products are not.
+- Increasing the number of time points which will increase the frequency resolution.
+- Zero-padding is one way to increase number of time points.
+- Any frequency faster than the nyquist is going to be distorted and aliased into lower frequencies.
+- You do not need to normalize phase as it stays the same regardless of the length (amplitude) of a line/vector
