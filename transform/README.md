@@ -99,7 +99,7 @@ $$
 \vec{A} = |\vec{dcn}| ^ 2
 $$
 
-Additionnaly, if I want to use power instead of amplitudes, I can do
+Additionally, if I want to use power $\vec{P}$ instead of $\vec{A}$, I can do
 
 $$
 \vec{P} = \vec{A}^2
