@@ -93,7 +93,7 @@ $$
 
 Otherwise we will end up with amplitudes way too large - as the loop progresses, the dot products get bigger and bigger.
 
-Next step, compute the amplitudes. This is straightforward. First, get absolute values of \vec{dcn}, and then square it.
+Next step, compute the amplitudes. This is straightforward. First, get absolute values of $\vec{dcn}$, and then square it.
 
 $$
 \vec{A} = |\vec{dcn}| ^ 2
