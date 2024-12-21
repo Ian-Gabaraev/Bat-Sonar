@@ -284,7 +284,7 @@ fcoff = fcoff / t.size
 amplitudes = np.abs(fcoff)
 amplitudes[1:] = 2*amplitudes[1:]
 power = np.square(amplitudes[1:])
-frequencies = np.linspace(0, nyquist, srate)
+frequencies = np.linspace(0, nyquist, t.size//2)
 
 plt.figure(figsize=(10,5))
 plt.grid(True)
