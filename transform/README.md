@@ -328,3 +328,17 @@ $$
 - Zero-padding is one way to increase number of time points.
 - Any frequency faster than the nyquist is going to be distorted and aliased into lower frequencies.
 - You do not need to normalize phase as it stays the same regardless of the length (amplitude) of a line/vector
+- High magnitude - the result of a dot between CSW and a signal indicates high similarity
+
+---
+## Extra formulas
+
+#### Amplitude from DFT to Decibels
+$$
+A_{dB} = 20 \times \log_{10}(\frac{\vec{A}}{A_0})
+$$
+
+- $\vec{A}$ - original amplitude vector
+- $A_0$ - reference amplitude, for signal analysis it can be $1$
+
+#### 
