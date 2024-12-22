@@ -1,5 +1,11 @@
 # Choosing the ML model
 
+### Logistic Regression or DL?
+
+DL normally requires a very large dataset of hundreds of thousands of samples. It may not be necessary for my cause.
+
+Although I could automate sample generation from live recordings, I am not sure how long it will take me to collect all that raw audio. Simpler models like Softmax Regression may work for me.
+
 ### Preliminary notes & ideas
 
 From my research, I found two promising candidates for the neural network design:
@@ -10,7 +16,7 @@ From my research, I found two promising candidates for the neural network design
 I am just sketching ideas right now, but here are the reasons why either of them is a promising option.
 
 ### Convolutional Neural Networks
-The main advantage of this model is that it seems to work nicely with images - and if I opt to use spectrograms/sonograms as an input, that is a plus. 
+The main advantage of this model is that it seems to work nicely with images - and if I opt to use spectrograms/sonograms (like Mel) as an input, that is a plus. 
 
 Another benefit of using `CNN` is of they way the layers work together, where each neuron in a layer only sees a portion of the input vector, and each consecutive neuron sees its own portion plus part of the portion that the previous neuron processed. 
 
