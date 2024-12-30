@@ -1,5 +1,11 @@
 # Choosing the ML model
 
+### Logistic Regression or DL?
+
+DL normally requires a very large dataset of hundreds of thousands of samples. It may not be necessary for my cause.
+
+Although I could automate sample generation from live recordings, I am not sure how long it will take me to collect all that raw audio. Simpler models like Softmax Regression may work for me.
+
 ### Preliminary notes & ideas
 
 From my research, I found two promising candidates for the neural network design:
@@ -10,7 +16,7 @@ From my research, I found two promising candidates for the neural network design
 I am just sketching ideas right now, but here are the reasons why either of them is a promising option.
 
 ### Convolutional Neural Networks
-The main advantage of this model is that it seems to work nicely with images - and if I opt to use spectrograms/sonograms as an input, that is a plus. 
+The main advantage of this model is that it seems to work nicely with images - and if I opt to use spectrograms/sonograms (like Mel) as an input, that is a plus. 
 
 Another benefit of using `CNN` is of they way the layers work together, where each neuron in a layer only sees a portion of the input vector, and each consecutive neuron sees its own portion plus part of the portion that the previous neuron processed. 
 
@@ -123,3 +129,25 @@ $$
 
 ### Summary
 There are currently two candidates, each has their own advantages. Experimentation is required to find the best one.
+
+
+### Extra
+
+#### Tips
+- Adding polynomials can help make the model more accurate
+
+#### Terminology
+- `training set` - used to train the model
+
+- `cross validation set` (also called validation, development, or dev set) - used to evaluate the different model configurations you are choosing from. For example, you can use this to make a decision on what polynomial features to add to your dataset
+caffeine
+- `test set` - used to give a fair estimate of your chosen model's performance against new examples. This should not be used to make decisions while you are still developing the models.
+- `regularization` - lambda ($\lambda$) is a hyperparameter used to control the complexity of the model and reduce overfitting. Regularization adds a penalty to the loss function. 
+The standard loss function (e.g., mean squared error for regression) is modified to include a term that penalizes large model weights or coefficients.
+$\lambda$ controls the strength of this penalty: By adjusting the value of $\lambda$, you control how much importance the model places on keeping the weights small relative to minimizing the loss.
+
+
+#### Formulas
+- Mean Squared Error of a Training Set
+
+$$J_{train}(\vec{w}, b) = \frac{1}{2m_{train}}\left[\sum_{i=1}^{m_{train}}(f_{\vec{w},b}(\vec{x}_{train}^{(i)}) - y_{train}^{(i)})^2\right]$$
