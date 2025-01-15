@@ -52,7 +52,7 @@ The `sampling rate` $S_r$ refers to the number of samples taken on a signal per 
 
 The `Nyquist frequency` $F_n$ is a term from the Nyquist theorem that states, that in order to accurately sample a signal, its sampling rate $S_r$ has to be at least 2x higher than the highest frequency present in the signal.
 
-$$ S_r = \frac{max(F)}{2} $$
+$$ S_r = max(F) * 2 $$
 $$ F_n = \frac{S_r}{2} $$
 
 In practice, we should always allow for more space, so a realistic sampling rate should be:
