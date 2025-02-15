@@ -1,5 +1,6 @@
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import CountryButton from "./CountryButton";
 
 const MainNav = () => {
     return (
@@ -22,6 +23,7 @@ const MainNav = () => {
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
+                <CountryButton />
             </Container>
         </Navbar>
     );
