@@ -12,19 +12,26 @@ code {
     monospace;
 }
 
-.monitor-container {
-  width: 60%;
-  height: 40vh;
-  background-color: black;
+
+.monitor-view {
+  width: 70%;
   border: 2px solid #ccc;
-  border-radius: 8px;
+  height: 50vh;
+  background-color: black;
+  border-radius: 2px;
   margin: 40px auto;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
+
 
 canvas {
   display: block;
   width: 100%;
+}
+
+.monitor {
+  width: 60%;
+  display: flex;
+  justify-content: center;
 }

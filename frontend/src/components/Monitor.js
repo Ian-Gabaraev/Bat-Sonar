@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import InternetConnection from "../layouts/InternetConnection";
+import CurrentDevice from "../layouts/CurrentDevice";
 
 const Monitor = () => {
     const canvasRef = useRef(null);
@@ -43,8 +45,14 @@ const Monitor = () => {
     }, []);
 
     return (
-        <div className="monitor-container">
-            <canvas ref={canvasRef} width={500} height={200}></canvas>
+        <div>
+            <div className="d-flex flex-column align-items-center mt-5">
+                <InternetConnection />
+                    <div className="monitor-view">
+                        <canvas ref={canvasRef} width={500} height={200}></canvas>
+                    </div>
+                <CurrentDevice />
+            </div>
         </div>
     );
 };
